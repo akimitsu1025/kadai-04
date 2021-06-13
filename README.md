@@ -29,3 +29,4 @@ Classの基本：https://www.tech-teacher.jp/blog/python-class/<br>
 課題５、６の内容を、日付時刻をファイル名としたレシートファイル（テキスト）に出力できるようにしてください
 # kadai-04
 # kadai-04
+# kadai-04
