@@ -30,3 +30,4 @@ Classの基本：https://www.tech-teacher.jp/blog/python-class/<br>
 # kadai-04
 # kadai-04
 # kadai-04
+# -kadai-04
