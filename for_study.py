@@ -1,36 +1,35 @@
 ﻿import pandas as pd
 
 ### 商品クラス
-class Item: # Itemクラスの定義。
-    def __init__(self,item_code,item_name,price): # コンストラクタで初期設定。第１引数にself。第２引数にitem_code。第３引数にitem_name。第４引数にprice。
-        self.item_code=item_code # この表記がわからない。変数self.item_codeに引数item_codeを代入？
-        self.item_name=item_name # この表記がわからない。変数self.item_nameに引数item_nameを代入？
-        self.price=price         # この表記がわからない。変数self.priceに引数priceを代入？
+class Item:
+    def __init__(self,item_code,item_name,price):
+        self.item_code=item_code
+        self.item_name=item_name
+        self.price=price
     
-    def get_price(self): # get_priceメソッドの定義。引数はselfのみ。→何のためのメソッド？
-        return self.price # 6行目のself.priceを返す？
+    def get_price(self):
+        return self.price
 
 ### オーダークラス
-class Order: # Orderクラスの定義。引数はなくて大丈夫？
-    def __init__(self,item_master): # コンストラクタで初期設定。第１引数にself。第２引数にitem_master。
-        self.item_order_list=[] # self.item_order_listに空のリストを用意？何のために？ここにorderの情報が入っている。
-        self.item_count_list=[] # 自分のコード。回答を見て追加。
-        self.item_master=item_master # 変数self.item.masterに引数item_masterを代入？
+class Order:
+    def __init__(self,item_master):
+        self.item_order_list=[]
+        self.item_count_list=[]
+        self.item_master=item_master
     
-    def add_item_order(self, item_code, item_count): # add_item_orderメソッドの定義。第１引数にself。第２引数にitem_code。第２引数は自分のコード。回答を見て追加。
-        self.item_order_list.append(item_code) # 空リストで用意したself.item_order_listにitem_codeを追加する。item_codeとはadd_item_orderメソッドで定義した関数の引数。。。どういう関係？
-        self.item_count_list.append(item_count) #自分のコード。回答を見て追加。
+    def add_item_order(self, input_code, input_count):       # 引数を(self, item_code, item_count)から(self, input_code, input_count)に。
+        self.item_order_list.append(input_code, input_count) # 引数を(item_code, item_count)から(input_code, input_count)
 
-    def view_item_list(self): # view_item_listメソッドの定義。引数はselfのみ。→何のためのメソッド？
-        for item in self.item_order_list: # 変数itemにself.item_order_listを代入して繰り返し処理。self.item_order_listとは14行目で定義（準備？）した空リスト？
-            print("商品コード:{}".format(item)) # 「商品コード:変数item」とprint。
+    def view_item_list(self):
+        for item in self.item_order_list:
+            print("商品コード:{}".format(item))
 
     #1 オーダー登録した商品の一覧（商品名、価格）を表示できるようにしてください
     def print_list(self):
-        for xxx in self.item_order_list:           # オーダーをループ処理。：self.item_order_listをループ処理。001とか。
-            for yyy in self.item_master:           # self.item_masterをループ処理。この2行がいまいちよくわからない。for y in self.item_order_list: からのfor x in self.item_master:。。？
-                if yyy.item_code == xxx:             # 取り出したマスターを元に、コードを検索して商品名、価格名を表示させる。
-                    print(yyy.item_name, yyy.price)  #
+        for xxx in self.item_order_list:
+            for yyy in self.item_master:
+                if yyy.item_code == xxx:
+                    print(yyy.item_name, yyy.price)
                     break
 
     #2 オーダーをコンソール（ターミナル）から登録できるようにしてください。登録時は商品コードをキーとする
@@ -45,37 +44,6 @@ class Order: # Orderクラスの定義。引数はなくて大丈夫？
             print('正しいコード（001 or 002 or 003 or 004 or 005）を入力してください。')
 
     #5 オーダー登録した商品の一覧（商品名、価格）を表示し、かつ合計金額、個数を表示できるようにしてください
-    # →「オーダー登録した商品の一覧（商品名、価格）を表示」は#1と同じ処理では？
-#    def view_order(self):
-#        for item_order in self.item_order_list:
-#            print(self.print_list(item_order))
-
-
-
-
-
-
-
-"""
-# 米谷さんコード
- def view_order(self):
-        number=1
-        self.sum_price=0
-        self.sum_count=0
-        self.receipt_name="receipt_{}.log".format(self.datetime)
-        self.write_receipt("-----------------------------------------------")
-        self.write_receipt("オーダー登録された商品一覧\n")
-        for item_order,item_count in zip(self.item_order_list,self.item_count_list):
-            result=self.get_item_data(item_order)
-            self.sum_price+=result[1]*int(item_count)
-            self.sum_count+=int(item_count)
-            receipt_data="{0}.{2}({1}) : ￥{3:,}　{4}個 = ￥{5:,}".format(number,item_order,result[0],result[1],item_count,int(result[1])*int(item_count))
-            self.write_receipt(receipt_data)
-            number+=1
-"""
-
-
-
 
 #3 商品マスタをCSVから登録できるようにしてください
 def master_registration():
@@ -107,8 +75,7 @@ def main(): # main関数の定義。インデントされていないので、�
     order.view_item_list() # 37行目で定義した変数orderに20行目で定義したview_item_listメソッドを追加。引数はなくていいのか？
     order.registration()
     order.print_list()
-#    order.view_order()
-
+    #order.add_item_order(input_code, input_count)
 
 if __name__ == "__main__": # pyファイルとして実行されているかを確認する定型文。
     main()
